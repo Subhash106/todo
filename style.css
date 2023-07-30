@@ -1,0 +1,63 @@
+*,
+*::after,
+*::before {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  color: #444;
+}
+
+.container {
+  max-width: 120rem;
+  margin: 0 auto;
+}
+
+.btn {
+  border: none;
+  border-radius: 0.4rem;
+}
+
+.btn-small {
+  font-size: 1rem;
+  padding: 0.4rem 1rem;
+}
+
+.btn-medium {
+  font-size: 1.5rem;
+  padding: 0.8rem 1.5rem;
+}
+
+.card {
+  padding: 0.4rem;
+  border-radius: 0.4rem;
+}
+
+.card-basic {
+  background-color: #eee;
+}
+
+.card-done {
+  background-color: lightgreen;
+}
+
+input[type="text"] {
+  padding: 0.4rem;
+  font-size: 1.5rem;
+  border-radius: 0.4rem;
+  border: 2px solid #777;
+}
+
+input[type="text"]:focus {
+  outline: none;
+  border-color: #333;
+}
