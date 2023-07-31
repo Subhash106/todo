@@ -25,6 +25,7 @@ body {
 .btn {
   border: none;
   border-radius: 0.4rem;
+  cursor: pointer;
 }
 
 .btn-small {

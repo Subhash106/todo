@@ -20,45 +20,18 @@
         <thead>
           <tr>
             <th>
-              <input type="text" placeholder="Enter a task to do" />
+              <input
+                id="taskInput"
+                type="text"
+                placeholder="Enter a task to do"
+              />
             </th>
             <th colspan="3">
-              <button class="btn btn-medium">Add</button>
+              <button id="addTask" class="btn btn-medium">Add</button>
             </th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td>
-              <div class="card card-basic">Go to office</div>
-            </td>
-            <td>
-              <button class="btn btn-small">Done</button>
-            </td>
-            <td><button class="btn btn-small">Edit</button></td>
-            <td><button class="btn btn-small">Delete</button></td>
-          </tr>
-          <tr>
-            <td>
-              <div class="card card-basic">Go to office</div>
-            </td>
-            <td>
-              <button class="btn btn-small">Done</button>
-            </td>
-            <td><button class="btn btn-small">Edit</button></td>
-            <td><button class="btn btn-small">Delete</button></td>
-          </tr>
-          <tr>
-            <td>
-              <div class="card card-done">Go to office</div>
-            </td>
-            <td>
-              <button class="btn btn-small">Done</button>
-            </td>
-            <td><button class="btn btn-small">Edit</button></td>
-            <td><button class="btn btn-small">Delete</button></td>
-          </tr>
-        </tbody>
+        <tbody id="tasksContainer"></tbody>
       </table>
     </div>
   </body>
