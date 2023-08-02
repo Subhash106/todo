@@ -1,15 +1,60 @@
-import React from "react";
+import React, { useState } from "react";
 const Card = React.lazy(() => import("components/Card"));
 const Button = React.lazy(() => import("components/Button"));
 const TextInput = React.lazy(() => import("components/TextInput"));
-const tasks = [
-  { id: 1, title: "Task 1", status: true },
-  { id: 1, title: "Task 2", status: false },
-];
+
+import "./style.css";
 
 export default function App() {
+  const [addOrUpdate, setAddOrUpdate] = useState("Add");
+  const [task, setTask] = useState({ id: "", title: "", status: false });
+  const [tasks, setTasks] = useState([
+    { id: 1, title: "Task 1", status: true },
+    { id: 2, title: "Task 2", status: false },
+  ]);
+
+  const addTaskHandler = () => {
+    if (addOrUpdate === "Add") {
+      setTasks(tasks.concat({ ...task, id: tasks.length + 1 }));
+    } else {
+      setTasks([...tasks.filter((tsk) => tsk.id !== task.id), task]);
+    }
+
+    setTask({ ...task, title: "" });
+    setAddOrUpdate("Add");
+  };
+
+  const markATaskDoneHandler = (id) => {
+    setTasks(
+      tasks.map((tsk) => {
+        if (tsk.id === id) {
+          tsk.status = true;
+        }
+
+        return tsk;
+      })
+    );
+  };
+
+  const editTaskHandler = (id) => {
+    setAddOrUpdate("Update");
+    setTask(tasks.find((tsk) => tsk.id === id));
+  };
+
+  const deleteTaskHandler = (id) => {
+    setTasks(tasks.filter((tsk) => tsk.id !== id));
+  };
+
+  const inputChangeHandler = (e) => {
+    const {
+      target: { value },
+    } = e;
+
+    setTask({ ...task, title: value });
+  };
+
   return (
-    <div class="container">
+    <div className="container">
       <h1>My Tasks</h1>
       <table>
         <thead>
@@ -19,27 +64,46 @@ export default function App() {
                 id="taskInput"
                 type="text"
                 placeholder="Enter a task to do"
+                value={task.title}
+                onChange={inputChangeHandler}
               />
             </th>
-            <th colspan="3">
-              <Button>Add</Button>
+            <th colSpan="3">
+              <Button onClick={addTaskHandler}>{addOrUpdate}</Button>
             </th>
           </tr>
         </thead>
         <tbody>
           {tasks.map(({ id, title, status }) => (
-            <tr>
+            <tr key={id}>
               <td>
-                <Card>{title}</Card>
+                <Card type={status ? "success" : "basic"}>{title}</Card>
               </td>
               <td>
-                <Button class="btn btn-small">Done</Button>
+                <Button
+                  className="btn btn-small"
+                  onClick={() => markATaskDoneHandler(id)}
+                  disabled={status}
+                >
+                  Done
+                </Button>
               </td>
               <td>
-                <Button class="btn btn-small">Edit</Button>
+                <Button
+                  className="btn btn-small"
+                  onClick={() => editTaskHandler(id)}
+                  disabled={status}
+                >
+                  Edit
+                </Button>
               </td>
               <td>
-                <Button class="btn btn-small">Delete</Button>
+                <Button
+                  className="btn btn-small"
+                  onClick={() => deleteTaskHandler(id)}
+                >
+                  Delete
+                </Button>
               </td>
             </tr>
           ))}
