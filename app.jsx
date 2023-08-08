@@ -1,6 +1,9 @@
 import React, { useState } from "react";
+
+import { Button } from "@subashchandra/components";
+
 const Card = React.lazy(() => import("components/Card"));
-const Button = React.lazy(() => import("components/Button"));
+const ButtonMF = React.lazy(() => import("components/Button"));
 const TextInput = React.lazy(() => import("components/TextInput"));
 
 import "./style.css";
@@ -69,7 +72,7 @@ export default function App() {
               />
             </th>
             <th colSpan="3">
-              <Button onClick={addTaskHandler}>{addOrUpdate}</Button>
+              <ButtonMF onClick={addTaskHandler}>{addOrUpdate}</ButtonMF>
             </th>
           </tr>
         </thead>
