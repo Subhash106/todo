@@ -18,7 +18,7 @@ module.exports = {
     rules: [
       { test: /\.css$/, use: ["style-loader", "css-loader"] },
       {
-        test: /\.jsx$/,
+        test: /\.(js|jsx)$/,
         use: {
           loader: "babel-loader",
           options: {
@@ -49,5 +49,8 @@ module.exports = {
     splitChunks: {
       chunks: "all",
     },
+  },
+  resolve: {
+    extensions: [".js", ".jsx"],
   },
 };

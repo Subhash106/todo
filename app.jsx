@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { Suspense, useState } from "react";
 
-import { Button } from "@subashchandra/components";
+//import { button } from "@subashchandra/components";
 
-const Card = React.lazy(() => import("components/Card"));
-const ButtonMF = React.lazy(() => import("components/Button"));
-const TextInput = React.lazy(() => import("components/TextInput"));
+//const div = React.lazy(() => import("components/div"));
+//const button = React.lazy(() => import("components/button"));
+//const TextInput = React.lazy(() => import("components/TextInput"));
 
 import "./style.css";
 
@@ -57,61 +57,65 @@ export default function App() {
   };
 
   return (
-    <div className="container">
-      <h1>My Tasks</h1>
-      <table>
-        <thead>
-          <tr>
-            <th>
-              <TextInput
-                id="taskInput"
-                type="text"
-                placeholder="Enter a task to do"
-                value={task.title}
-                onChange={inputChangeHandler}
-              />
-            </th>
-            <th colSpan="3">
-              <ButtonMF onClick={addTaskHandler}>{addOrUpdate}</ButtonMF>
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {tasks.map(({ id, title, status }) => (
-            <tr key={id}>
-              <td>
-                <Card type={status ? "success" : "basic"}>{title}</Card>
-              </td>
-              <td>
-                <Button
-                  className="btn btn-small"
-                  onClick={() => markATaskDoneHandler(id)}
-                  disabled={status}
-                >
-                  Done
-                </Button>
-              </td>
-              <td>
-                <Button
-                  className="btn btn-small"
-                  onClick={() => editTaskHandler(id)}
-                  disabled={status}
-                >
-                  Edit
-                </Button>
-              </td>
-              <td>
-                <Button
-                  className="btn btn-small"
-                  onClick={() => deleteTaskHandler(id)}
-                >
-                  Delete
-                </Button>
-              </td>
+    <Suspense fallback={<p>Loading...</p>}>
+      <div className="container">
+        <h1>My Tasks</h1>
+        <table>
+          <thead>
+            <tr>
+              <th>
+                <input
+                  id="taskInput"
+                  type="text"
+                  placeholder="Enter a task to do"
+                  value={task.title}
+                  onChange={inputChangeHandler}
+                />
+              </th>
+              <th colSpan="3">
+                <button onClick={() => addTaskHandler()} disabled={!task.title}>
+                  {addOrUpdate}
+                </button>
+              </th>
             </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+          </thead>
+          <tbody>
+            {tasks.map(({ id, title, status }) => (
+              <tr key={id}>
+                <td>
+                  <div type={status ? "success" : "basic"}>{title}</div>
+                </td>
+                <td>
+                  <button
+                    className="btn btn-small"
+                    onClick={() => markATaskDoneHandler(id)}
+                    disabled={status}
+                  >
+                    Done
+                  </button>
+                </td>
+                <td>
+                  <button
+                    className="btn btn-small"
+                    onClick={() => editTaskHandler(id)}
+                    disabled={status}
+                  >
+                    Edit
+                  </button>
+                </td>
+                <td>
+                  <button
+                    className="btn btn-small"
+                    onClick={() => deleteTaskHandler(id)}
+                  >
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </Suspense>
   );
 }
