@@ -22,7 +22,7 @@ const Greetings = () => {
 
   return (
     <div>
-      <button onClick={fetchGreetings}>{buttonText}</button>
+      <button onClick={() => fetchGreetings()}>{buttonText}</button>
       {greetings && (
         <>
           <h2>Greetings</h2>

@@ -12,12 +12,19 @@ export const server = setupServer(
     return res(
       ctx.json([
         {
-          id: "f8dd058f-9006-4174-8d49-e3086bc39c21",
-          text: `Avoid Nesting When You're Testing`,
+          text: "Hello there",
         },
         {
-          id: "8ac96078-6434-4959-80ed-cc834e7fef61",
-          text: `How I Built A Modern Website In 2021`,
+          text: "Hi",
+        },
+        {
+          text: "Hey",
+        },
+        {
+          text: "What's up",
+        },
+        {
+          text: "How are you?",
         },
       ])
     );
